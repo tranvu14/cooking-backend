@@ -11,16 +11,18 @@ const addDish = async(dish : IDish) => {
   const results = await client.execute(`
     INSERT INTO dish (
       title,
+      thumbnail,
       description,
       updated_at,
       created_at
     ) VALUES (
       ?,
       ?,
+      ?,
       NOW(),
       NOW()
     );
-  `, [dish.title, dish.description]);
+  `, [dish.title, dish.thumbnail, dish.description]);
   return results;
 }
 const addIngredientIntoDish = async (dish_id : number | undefined, ingredient : IIngredient) => {

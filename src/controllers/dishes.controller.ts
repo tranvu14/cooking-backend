@@ -10,7 +10,7 @@ export async function getDishes({ response }: { response: any }) {
     response.body = results;
   } catch (error) {
     response.status = 400;
-    response.body = { "message": "Invalid" }
+    response.body = { "message": error.message }
   }
 }
 
@@ -26,7 +26,7 @@ export async function addDish({ request, response }: { request: any, response: a
     }
   } catch (error) {
     response.status = 500;
-    response.body = { "message": "Invalid" }
+    response.body = { "message": error.message }
   }
 }
 
@@ -42,5 +42,4 @@ export async function getDishById({ params, request, response }: { params: { id:
     response.status = 500;
     response.body = { "message": "Internal Server Error" }
   }
-
 }
