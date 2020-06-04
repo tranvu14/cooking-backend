@@ -41,7 +41,7 @@ const userRegister = async (user: IUser) => {
 
 const userLogin = async (user: IUser) => {
   // check exist user in db
-  const users = await UserRepository.findUserByEmail(user);
+  const users = await UserRepository.findUserByEmail(user.email);
   if (users?.length === 0 || users === undefined) {
     throw new Error("User Invalid");
   }
@@ -57,11 +57,11 @@ const userLogin = async (user: IUser) => {
 
   const payload: Payload = {
     iss: user.email,
-    exp: setExpiration(new Date().getTime() + 86400),
+    exp: setExpiration(new Date().getTime() + 86400000),
   }
 
   //token include user.id
-  const token = await makeJwt({ header, payload, key: user.email });
+  const token = await makeJwt({ header, payload, key });
 
   return {
     user: user,

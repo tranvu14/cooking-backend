@@ -1,5 +1,8 @@
+import { validateJwt } from "https://deno.land/x/djwt/validate.ts"
+
 import IDish from "../models/IDish.ts"
 import DishService from "../services/dishes.service.ts";
+import IRate from "../models/IRate.ts";
 
 export async function getDishes({ response }: { response: any }) {
   // get params and body 
@@ -43,3 +46,23 @@ export async function getDishById({ params, request, response }: { params: { id:
     response.body = { "message": "Internal Server Error" }
   }
 }
+
+export async function ratingDish(context : any) {
+  const body = await context.request.body();
+  const rating : IRate = body.value;
+  // validate dishId
+  let dishId: number = Number.parseInt(context.params.id);
+
+  rating.user_id = context.request.userId;
+  rating.dish_id = dishId;
+  
+  try {
+    const results = await DishService.ratingDish(rating);
+    context.response.status = 201;
+    context.response.body = { "message": "Succesfully" };
+  } catch (error) {
+    context.response.status = 404;
+    context.response.body = { "message": error.message };
+  }
+
+} 

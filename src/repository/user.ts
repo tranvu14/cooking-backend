@@ -8,7 +8,7 @@ const checkIsExistUser = async (user : IUser) => {
   return results.rows?.length !== 0;
 }
 
-const findUserByEmail = async (user: IUser) => {
+const findUserByEmail = async (email: string) => {
   const results = await client.execute(`
     SELECT
       user_id,
@@ -17,7 +17,7 @@ const findUserByEmail = async (user: IUser) => {
       password
     FROM users 
     WHERE email=? 
-  `, [user.email]);
+  `, [email]);
   return results.rows;
 }
 
@@ -44,7 +44,7 @@ const UserRepository = {
   checkIsExistUser,
   userRegister,
   findUserByEmail,
-  
+
 }
 
 export default UserRepository;

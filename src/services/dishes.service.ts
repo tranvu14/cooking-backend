@@ -1,6 +1,7 @@
 import DishRepository from "../repository/dish.ts";
 import IDish from "../models/IDish.ts";
 import IIngredient from "../models/IIngredient.ts";
+import IRate from "../models/IRate.ts";
 
 const getDishes = async () => {
   const dishes = await DishRepository.getDishes();
@@ -26,10 +27,18 @@ const getDishById = async (dishId : number) => {
   } 
   return dish;
 }
+
+
+const ratingDish = async (rating : IRate) => {
+  const results = await DishRepository.ratingDish(rating);
+  return results;
+}
+
 const DishService = {
   getDishes,
   addDish,
-  getDishById
+  getDishById,
+  ratingDish
 }
 
 export default DishService;
