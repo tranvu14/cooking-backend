@@ -1,0 +1,11 @@
+{
+    "name": "cooking-app",
+    "version": "1.0.0",
+    "description": "",
+    "scripts": {
+        "start": "./deno run --allow-net --unstable index.ts",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC"
+}
