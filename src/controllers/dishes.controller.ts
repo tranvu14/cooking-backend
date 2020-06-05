@@ -42,8 +42,8 @@ export async function getDishById({ params, request, response }: { params: { id:
     response.status = 200;
     response.body = dish;
   } catch (error) {
-    response.status = 500;
-    response.body = { "message": "Internal Server Error" }
+    response.status = 404;
+    response.body = { "message": error.message }
   }
 }
 

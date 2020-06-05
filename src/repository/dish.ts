@@ -24,7 +24,7 @@ const addDish = async (dish: IDish) => {
       description,
       prepare,
       doing,
-      eating
+      eating,
       updated_at,
       created_at
     ) VALUES (
